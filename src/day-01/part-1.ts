@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import * as fs from 'fs';
-import { testSetup } from './setup';
+import { testSetup } from '../util';
 
 function readFile(filename: string): number[] {
   var array = fs.readFileSync(filename).toString().trim().split("\n");
