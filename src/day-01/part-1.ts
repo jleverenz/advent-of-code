@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import * as fs from 'fs';
+import { testSetup } from './setup';
 
 function readFile(filename: string): number[] {
   var array = fs.readFileSync(filename).toString().trim().split("\n");
@@ -17,13 +18,15 @@ function calculateDescents(depthArray: number[]): number {
 }
 
 describe('day-01, part-1', () => {
+  testSetup('day-01');
+
   it('sample', () => {
-    const answer = calculateDescents(readFile('src/day-01/sample'));
+    const answer = calculateDescents(readFile('./sample'));
     expect(answer).to.equal(7);
   });
 
   it('input', () => {
-    const answer = calculateDescents(readFile('src/day-01/input'));
+    const answer = calculateDescents(readFile('./input'));
     expect(answer).to.equal(1477);
   });
 });
