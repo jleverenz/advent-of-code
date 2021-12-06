@@ -1,6 +1,5 @@
 import { expect } from 'chai';
-import * as fs from 'fs';
-import { testSetup } from '../util';
+import { readFile, testSetup } from '../util';
 
 enum Direction {
   forward,
@@ -18,10 +17,6 @@ interface Position {
   depth: number;
   aim: number;
 };
-
-function readFile(filename: string): string[] {
-  return fs.readFileSync(filename).toString().trim().split("\n");
-}
 
 function parseLine(line: string): Command {
   const [dir, val]: string[] = line.split(' ');

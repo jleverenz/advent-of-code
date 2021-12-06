@@ -1,10 +1,5 @@
 import { expect } from 'chai';
-import * as fs from 'fs';
-import { testSetup } from '../util';
-
-function readFile(filename: string): string[] {
-  return fs.readFileSync(filename).toString().trim().split("\n");
-}
+import { readFile, testSetup } from '../util';
 
 function countBit(textCommands: string[], position: number) : number {
   let bitCount: number = 0;
