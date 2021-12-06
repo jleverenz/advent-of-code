@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "mocha"
+    "start": "mocha src/**/*.ts",
+    "start.watch": "nodemon -x mocha src/**/*.ts",
+    "test": "mocha",
+    "test.watch": "nodemon -x mocha -e js,ts"
   },
   "keywords": [],
   "author": "",
