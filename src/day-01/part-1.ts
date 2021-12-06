@@ -16,7 +16,7 @@ function calculateDescents(depthArray: number[]): number {
   return count;
 }
 
-describe('day-01', () => {
+describe('day-01, part-1', () => {
   it('sample', () => {
     const answer = calculateDescents(readFile('src/day-01/sample'));
     expect(answer).to.equal(7);
