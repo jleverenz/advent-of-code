@@ -1,0 +1,4 @@
+#spec: test/*.test.ts
+extension: ['js', 'ts']
+require: ts-node/register
+parallel: false
