@@ -4,7 +4,7 @@ import { readFile, testSetup } from '../util';
 enum Direction {
   forward,
   up,
-  down
+  down,
 }
 
 interface Command {
@@ -15,27 +15,33 @@ interface Command {
 interface Position {
   distance: number;
   depth: number;
-};
+}
 
 function parseLine(line: string): Command {
   const [dir, val]: string[] = line.split(' ');
-  return { direction: Direction[dir as keyof typeof Direction], value: parseInt(val) };
+  return {
+    direction: Direction[dir as keyof typeof Direction],
+    value: parseInt(val),
+  };
 }
 
 function calculatePosition(textCommands: string[]) {
-  return textCommands.reduce((a: Position, i: string) => {
-    const command = parseLine(i);
-    let newPosition = a;
-    if(command.direction == Direction.up) {
-      newPosition.depth -= command.value;
-    } else if(command.direction == Direction.down) {
-      newPosition.depth += command.value;
-    } else {
-      newPosition.distance += command.value;
-    };
+  return textCommands.reduce(
+    (a: Position, i: string) => {
+      const command = parseLine(i);
+      let newPosition = a;
+      if (command.direction == Direction.up) {
+        newPosition.depth -= command.value;
+      } else if (command.direction == Direction.down) {
+        newPosition.depth += command.value;
+      } else {
+        newPosition.distance += command.value;
+      }
 
-    return newPosition;
-  }, { distance: 0, depth: 0 });
+      return newPosition;
+    },
+    { distance: 0, depth: 0 },
+  );
 }
 
 describe('day-02, part-1', () => {

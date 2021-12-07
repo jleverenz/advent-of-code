@@ -7,7 +7,7 @@ function calculateDescents(depthArray: number[]): number {
   depthArray.slice(1).forEach((i: any) => {
     count += i > last ? 1 : 0;
     last = i;
-  })
+  });
   return count;
 }
 

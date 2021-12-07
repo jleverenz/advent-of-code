@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { readFile, testSetup } from '../util';
 
-function countBit(textCommands: string[], position: number) : number {
+function countBit(textCommands: string[], position: number): number {
   let bitCount: number = 0;
   textCommands.forEach((binString: string) => {
     const bit = [...binString][position];
@@ -22,13 +22,16 @@ function co2Filter(bitFields: string[], position: number): string[] {
   return bitFields.filter((i) => [...i][position] == criteria);
 }
 
-function calculateRating(bitFields: string[], filter: (a: string[], b: number) => string[]): number {
+function calculateRating(
+  bitFields: string[],
+  filter: (a: string[], b: number) => string[],
+): number {
   let pos = 0;
-  while(bitFields.length > 1) {
+  while (bitFields.length > 1) {
     bitFields = filter(bitFields, pos);
     pos++;
   }
-  return parseInt(bitFields[0],2);
+  return parseInt(bitFields[0], 2);
 }
 
 describe('day-03, part-2', () => {

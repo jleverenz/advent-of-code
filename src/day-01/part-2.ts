@@ -4,9 +4,9 @@ import { readFile, testSetup } from '../util';
 function calculateDescents(depthArray: number[]): number {
   let count = 0;
   let last;
-  for(let i = 0; i < depthArray.length - 2; i++) {
-    const sum = depthArray.slice(i, i+3).reduce((a,i) => a + i);
-    count += (last && sum > last) ? 1 : 0;
+  for (let i = 0; i < depthArray.length - 2; i++) {
+    const sum = depthArray.slice(i, i + 3).reduce((a, i) => a + i);
+    count += last && sum > last ? 1 : 0;
     last = sum;
   }
   return count;

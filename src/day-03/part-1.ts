@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { readFile, testSetup } from '../util';
 
-function countBits(textCommands: string[]) : number[] {
+function countBits(textCommands: string[]): number[] {
   const bitLength = textCommands[0].length;
   let bitCounts: number[] = Array(bitLength).fill(0);
   textCommands.forEach((binString: string) => {
