@@ -1,18 +1,18 @@
 import { expect } from 'chai';
 import { readFile, testSetup } from '../util';
 
-type FishState = Map<number, number>;
+type FishState = Map<number, bigint>;
 
 function advanceState(state: FishState): FishState {
-  const newState = new Map<number, number>();
+  const newState = new Map<number, bigint>();
   [...state.keys()]
     .sort()
     .reverse()
     .forEach((age) => {
-      const count = state.get(age) || 0;
+      const count = state.get(age) || 0n;
       if (age == 0) {
-        newState.set(6, (newState.get(6) || 0) + count);
-        newState.set(8, (newState.get(8) || 0) + count);
+        newState.set(6, (newState.get(6) || 0n) + count);
+        newState.set(8, (newState.get(8) || 0n) + count);
       } else {
         newState.set(age - 1, count);
       }
@@ -28,14 +28,14 @@ function advanceNStates(initialState: FishState, n: number): FishState {
   return state;
 }
 
-function calculatePopulationOnDayN(initialState: number[], n: number): number {
+function calculatePopulationOnDayN(initialState: number[], n: number): bigint {
   const countsByAge = initialState.reduce((a, i) => {
-    a.set(i, (a.get(i) || 0) + 1);
+    a.set(i, (a.get(i) || 0n) + 1n);
     return a;
-  }, new Map<number, number>());
+  }, new Map<number, bigint>());
 
   const finalState = advanceNStates(countsByAge, n);
-  return [...finalState.values()].reduce((a, i) => (a += i), 0);
+  return [...finalState.values()].reduce((a, i) => (a as bigint) + (i as bigint), 0n);
 }
 
 describe('day-06, part-1', () => {
@@ -46,8 +46,8 @@ describe('day-06, part-1', () => {
       .split(',')
       .map((i) => parseInt(i.trim()));
 
-    expect(calculatePopulationOnDayN(initialState, 18)).to.equal(26);
-    expect(calculatePopulationOnDayN(initialState, 80)).to.equal(5934);
+    expect(calculatePopulationOnDayN(initialState, 18)).to.equal(26n);
+    expect(calculatePopulationOnDayN(initialState, 80)).to.equal(5934n);
   });
 
   it('input', () => {
@@ -56,6 +56,6 @@ describe('day-06, part-1', () => {
       .map((i) => parseInt(i.trim()));
 
     const answer = calculatePopulationOnDayN(initialState, 80);
-    expect(answer).to.equal(391888);
+    expect(answer).to.equal(391888n);
   });
 });
