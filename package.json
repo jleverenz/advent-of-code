@@ -7,7 +7,9 @@
     "start": "mocha src/**/*.ts",
     "start.watch": "nodemon -x mocha src/**/*.ts",
     "test": "mocha",
-    "test.watch": "nodemon -x mocha -e js,ts"
+    "test.watch": "nodemon -x mocha -e js,ts",
+    "lint": "eslint --ext .js,.ts './**/*.{js,ts}'",
+    "lint.fix": "eslint --fix --ext .js,.ts './**/*.{js,ts}'"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +18,10 @@
     "@types/chai": "^4.2.22",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.11",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "chai": "^4.3.4",
+    "eslint": "^8.4.1",
     "mocha": "^9.1.3",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
