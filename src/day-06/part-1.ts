@@ -59,3 +59,24 @@ describe('day-06, part-1', () => {
     expect(answer).to.equal(391888n);
   });
 });
+
+describe('day-06, part-2', () => {
+  testSetup('day-06');
+
+  it('sample', () => {
+    const initialState = readFile('./sample')[0]
+      .split(',')
+      .map((i) => parseInt(i.trim()));
+
+    expect(calculatePopulationOnDayN(initialState, 256)).to.equal(26984457539n);
+  });
+
+  it('input', () => {
+    const initialState = readFile('./input')[0]
+      .split(',')
+      .map((i) => parseInt(i.trim()));
+
+    const answer = calculatePopulationOnDayN(initialState, 256);
+    expect(answer).to.equal(BigInt(1754597645339n));
+  });
+});
