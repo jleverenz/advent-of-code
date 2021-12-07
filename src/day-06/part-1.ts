@@ -1,11 +1,23 @@
 import { expect } from 'chai';
 import { readFile, testSetup } from '../util';
 
-function advanceState(state: number[]): number[] {
-  return state.reduce((a: number[], i: number) => a.concat(i == 0 ? [6, 8] : i - 1), []);
+type FishState = Map<number, number>;
+
+function advanceState(state: FishState): FishState {
+  const newState = new Map<number, number>();
+  [...state.keys()].sort().reverse().forEach(age => {
+    const count = state.get(age) || 0;
+    if(age == 0) {
+      newState.set(6, (newState.get(6) || 0) + count);
+      newState.set(8, (newState.get(8) || 0) + count);
+    } else {
+      newState.set(age - 1, count);
+    }
+  })
+  return newState;
 }
 
-function advanceNStates(initialState: number[], n: number): number[] {
+function advanceNStates(initialState: FishState, n: number): FishState {
   let state = initialState;
   for (let i = 0; i < n; i++) {
     state = advanceState(state);
@@ -14,26 +26,13 @@ function advanceNStates(initialState: number[], n: number): number[] {
 }
 
 function calculatePopulationOnDayN(initialState: number[], n: number): number {
-  // initial age set
-  const ageSet = new Set(initialState);
-
-  // each fish indepenently contributes to population according to initial age
-  const spawnByAge = [...ageSet].reduce((a, i) => {
-    a.set(i, advanceNStates([i], n).length);
-    return a;
-  }, new Map<number, number>());
-
-  // count initial fish at each age
   const countsByAge = initialState.reduce((a, i) => {
     a.set(i, (a.get(i) || 0) + 1);
     return a;
   }, new Map<number, number>());
 
-  // calculate population
-  return [...countsByAge.keys()].reduce((a, i) => {
-    a += (countsByAge.get(i) as number) * (spawnByAge.get(i) as number);
-    return a;
-  }, 0);
+  const finalState = advanceNStates(countsByAge, n);
+  return ([...finalState.values()].reduce((a,i) => a += i, 0));
 }
 
 describe('day-06, part-1', () => {
