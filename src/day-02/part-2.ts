@@ -30,7 +30,7 @@ function calculatePosition(textCommands: string[]) {
   return textCommands.reduce(
     (a: Position, i: string) => {
       const command = parseLine(i);
-      let newPosition = a;
+      const newPosition = a;
       if (command.direction == Direction.up) {
         newPosition.aim -= command.value;
       } else if (command.direction == Direction.down) {

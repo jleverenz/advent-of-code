@@ -18,7 +18,7 @@ export const filterNonDiagonal = (lines: Line[]) =>
   lines.filter((i) => i.start[0] == i.end[0] || i.start[1] == i.end[1]);
 
 export function calculateCoordHeights(lineSegments: Line[]): Map<string, number> {
-  let heights: Map<string, number> = new Map();
+  const heights: Map<string, number> = new Map();
 
   lineSegments.map(sortCoordinates).forEach((line) => {
     const xRange = makeRange(line.start[0], line.end[0]);
