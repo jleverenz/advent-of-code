@@ -5,15 +5,18 @@ type FishState = Map<number, number>;
 
 function advanceState(state: FishState): FishState {
   const newState = new Map<number, number>();
-  [...state.keys()].sort().reverse().forEach(age => {
-    const count = state.get(age) || 0;
-    if(age == 0) {
-      newState.set(6, (newState.get(6) || 0) + count);
-      newState.set(8, (newState.get(8) || 0) + count);
-    } else {
-      newState.set(age - 1, count);
-    }
-  })
+  [...state.keys()]
+    .sort()
+    .reverse()
+    .forEach((age) => {
+      const count = state.get(age) || 0;
+      if (age == 0) {
+        newState.set(6, (newState.get(6) || 0) + count);
+        newState.set(8, (newState.get(8) || 0) + count);
+      } else {
+        newState.set(age - 1, count);
+      }
+    });
   return newState;
 }
 
@@ -32,7 +35,7 @@ function calculatePopulationOnDayN(initialState: number[], n: number): number {
   }, new Map<number, number>());
 
   const finalState = advanceNStates(countsByAge, n);
-  return ([...finalState.values()].reduce((a,i) => a += i, 0));
+  return [...finalState.values()].reduce((a, i) => (a += i), 0);
 }
 
 describe('day-06, part-1', () => {
