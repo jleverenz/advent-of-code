@@ -18,18 +18,16 @@ export function calculateCoordHeights(lineSegments: Line[]): Map<string,number> 
   let heights: Map<string, number> = new Map();
 
   lineSegments.map(sortCoordinates).forEach(line => {
-    const xRange = line.end[0] - line.start[0];
-    const yRange = line.end[1] - line.start[1];
+    const xRange = makeRange(line.start[0], line.end[0]);
+    const yRange = makeRange(line.start[1], line.end[1]);
 
     let coordRange: number[][];
-    if (xRange == 0) {
-      coordRange = makeRange(line.start[1], line.end[1]).map(i => [line.start[0], i]);
-    } else if (yRange == 0) {
-      coordRange = makeRange(line.start[0], line.end[0]).map(i => [i, line.start[1]]);
+    if (xRange.length == 1) {
+      coordRange = yRange.map(i => [line.start[0], i]);
+    } else if (yRange.length == 1) {
+      coordRange = xRange.map(i => [i, line.start[1]]);
     } else {
-      const xRangeValues = makeRange(line.start[0], line.end[0]);
-      const yRangeValues = makeRange(line.start[1], line.end[1]);
-      coordRange = xRangeValues.map((i, idx) => [i, yRangeValues[idx]]);
+      coordRange = xRange.map((i, idx) => [i, yRange[idx]]);
     }
 
     coordRange.forEach(coord => {
