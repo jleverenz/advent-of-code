@@ -1,5 +1,7 @@
 # Advent of Code 2021
 
+[Advent of Code 2021](https://adventofcode.com/2021)
+
 Solutions as mocha tests, run them all with:
 
     npm start
