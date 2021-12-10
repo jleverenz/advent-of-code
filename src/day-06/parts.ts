@@ -77,6 +77,6 @@ describe('day-06, part-2', () => {
       .map((i) => parseInt(i.trim()));
 
     const answer = calculatePopulationOnDayN(initialState, 256);
-    expect(answer).to.equal(BigInt(1754597645339n));
+    expect(answer).to.equal(1754597645339n);
   });
 });
