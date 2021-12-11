@@ -1,22 +1,6 @@
 import { expect } from 'chai';
 import { readFile, testSetup } from '../util';
-
-interface Reading {
-  inputSignals: string[];
-  outputSignals: string[];
-}
-
-function parseReadings(inputString: string[]): Reading[] {
-  return inputString.map((i) => {
-    const [inputSignals, outputSignals] = i.split(`|`).map((series) =>
-      series
-        .trim()
-        .split(` `)
-        .map((i) => i.trim()),
-    );
-    return { inputSignals, outputSignals };
-  });
-}
+import { Reading, parseReadings } from './common';
 
 // 1,4,7,8
 function countOutputMatches(reading: Reading) {
