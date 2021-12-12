@@ -1,3 +1,4 @@
 extension: ['js', 'ts']
 require: ts-node/register
 parallel: false
+timeout: 5000
