@@ -9,7 +9,7 @@ export function parseReadings(inputString: string[]): Reading[] {
       series
         .trim()
         .split(` `)
-        .map((i) => i.trim().split('').sort().join(''))
+        .map((i) => i.trim().split('').sort().join('')),
     );
     return { inputSignals, outputSignals };
   });
